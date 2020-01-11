@@ -1,0 +1,10 @@
+robo_proj:
+    machine: "example_computer_config"
+    source: "/mnt/c/Users/weepi/code/main_projs/robotics_project"
+    dest: "~/class_projs/robotics_project/"
+    delete: True
+    exclude: _img_dir
+chess_proj:
+    machine: "example_computer_config"
+    source: "/mnt/c/Users/weepi/code/main_projs/chess_proj"
+    dest: "~/class_projs/chess_proj/"
