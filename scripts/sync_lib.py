@@ -59,12 +59,12 @@ def gen_rsync_on_data(computer_data,project_data,is_forward):
 
 def exec_command(command):
     joined_cmd = " ".join(command)
-    print(joined_cmd)
     subprocess.check_call(joined_cmd,shell=True)
 
 def exec_input(yaml_path,proj_name,is_forward):
     computer_data,project_data = load_data_from_yaml(yaml_path,proj_name)
     command = gen_rsync_on_data(computer_data,project_data,is_forward)
+    #print(" ".join(command))
     exec_command(command)
 
 def test():
@@ -81,6 +81,6 @@ def test():
 if __name__ == "__main__":
     assert len(sys.argv) == 3, "needs 2 arguments, the project name and the direction (true for forward)"
     projname = sys.argv[1]
-    is_forward = True if sys.argv[2].lower() == "true" else False
+    is_forward = True if "true" in sys.argv[2].lower()  else False
     yaml_path = os.path.expanduser("~/.local/var/")
     exec_input(yaml_path,projname,is_forward)
