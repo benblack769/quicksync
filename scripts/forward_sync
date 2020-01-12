@@ -1,2 +1,2 @@
 #!/bin/bash
-python sync_lib.py $1 True
+python ~/.local/bin/sync_lib.py $1 True
