@@ -21,7 +21,7 @@ def generate_rsync_command(username,ssh_key,ip,port,source,dest,is_forward,exclu
         command.append("--delete")
     if exclude:
         command.append("--exclude")
-        command.append(exclude)
+        command.append('"{}"'.format(exclude))
 
     dest_str = "{}@{}:{}".format(username,ip,dest)
     forward_end = [source,dest_str]
@@ -81,6 +81,6 @@ def test():
 if __name__ == "__main__":
     assert len(sys.argv) == 3, "needs 2 arguments, the project name and the direction (true for forward)"
     projname = sys.argv[1]
-    is_forward = sys.argv[2]
+    is_forward = True if sys.argv[2].lower() == "true" else False
     yaml_path = os.path.expanduser("~/.local/var/")
     exec_input(yaml_path,projname,is_forward)
