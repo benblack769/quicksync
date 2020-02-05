@@ -9,7 +9,7 @@ def generate_ssh_command(ssh_key,port):
         str += " -i '{}' ".format(ssh_key)
     if port:
         str += " -p {} ".format(port)
-    return '"{}"'.format(str)
+    return str
 
 def generate_rsync_command(username,ssh_key,ip,port,source,dest,is_forward,exclude,delete):
     command = [
@@ -59,12 +59,12 @@ def gen_rsync_on_data(computer_data,project_data,is_forward):
 
 def exec_command(command):
     joined_cmd = " ".join(command)
-    subprocess.check_call(joined_cmd,shell=True)
+    subprocess.check_call(command)#joined_cmd,shell=True)
 
 def exec_input(yaml_path,proj_name,is_forward):
     computer_data,project_data = load_data_from_yaml(yaml_path,proj_name)
     command = gen_rsync_on_data(computer_data,project_data,is_forward)
-    #print(" ".join(command))
+    print(" ".join(command))
     exec_command(command)
 
 def test():
