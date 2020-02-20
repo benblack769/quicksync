@@ -20,8 +20,13 @@ def generate_rsync_command(username,ssh_key,ip,port,source,dest,is_forward,exclu
     if delete:
         command.append("--delete")
     if exclude:
-        command.append("--exclude")
-        command.append('{}'.format(exclude))
+        if isinstance(exclude,list):
+            for e in exclude:
+                command.append("--exclude")
+                command.append(e)
+        else:
+            command.append("--exclude")
+            command.append('{}'.format(exclude))
 
     dest_str = "{}@{}:{}".format(username,ip,dest)
     forward_end = [source,dest_str]
