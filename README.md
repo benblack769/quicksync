@@ -50,15 +50,18 @@ chess_proj:
 
 ### Manual installation
 
-There is no install script, but you can manually install this tool by the following steps. 
+There is no install script, but you can manually install this tool by the following steps.
 
-1. Install dependencies:
-  1. pyyaml python package `pip install pyyaml`
-  1. rsync client on local `sudo apt-get install rsync`
-  1. rsync server on server
-  1. Start rsync server on server (on ubuntu `sudo systemctl start rsync`)
-1. Install quicksync
-  1. Move all files in `quicksync/scripts` directory to `~/.local/bin` (creating the folder if it is not there)
-  1. Add `~/.local/bin` to path permanently by appending `export PATH="$HOME/.local/bin/:$PATH"` to .bashrc
-  1. Create computer config and put it in `~/.loval/var/<machine_name>.yaml`
-  1. Create project config and put it in `~/.loval/var/projects.yaml` (this specific path is important! Script only looks here!)
+#### Install dependencies
+
+1. pyyaml python package `pip install pyyaml`
+1. rsync client on local `sudo apt-get install rsync`
+1. rsync server on server
+1. Start rsync server on server (on ubuntu `sudo systemctl start rsync`)
+
+#### Install quicksync
+
+1. Move all files in `quicksync/scripts` directory to `~/.local/bin` (creating the folder if it is not there)
+1. Add `~/.local/bin` to path permanently by appending `export PATH="$HOME/.local/bin/:$PATH"` to .bashrc
+1. Create computer config and put it in `~/.loval/var/<machine_name>.yaml`
+1. Create project config and put it in `~/.loval/var/projects.yaml` (this specific path is important! Script only looks here!)
