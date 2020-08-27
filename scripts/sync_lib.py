@@ -5,6 +5,7 @@ import sys
 
 def generate_ssh_command(ssh_key,port):
     str = "ssh "
+    str += " -o StrictHostKeyChecking=no "
     if ssh_key:
         str += " -i '{}' ".format(ssh_key)
     if port:
