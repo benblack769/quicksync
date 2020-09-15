@@ -1,2 +1,3 @@
 #!/bin/bash
-python ~/.local/bin/sync_lib.py $1 False
+python ~/.local/bin/sync_lib.py $1 False $2
+

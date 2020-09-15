@@ -36,12 +36,12 @@ def generate_rsync_command(username,ssh_key,ip,port,source,dest,is_forward,exclu
     return command
 
 
-def load_data_from_yaml(yaml_path,proj_name):
+def load_data_from_yaml(yaml_path,proj_name,computer_override):
     project_yaml = yaml_path + "projects.yaml"
     all_project_data = yaml.safe_load(open(project_yaml))
 
     project_data = all_project_data[proj_name]
-    machine_path = os.path.join(yaml_path,"{}.yaml".format(project_data['machine']))
+    machine_path = os.path.join(yaml_path,"{}.yaml".format(project_data['machine'] if computer_override is None else computer_override))
     machine_data = yaml.safe_load(open(machine_path))
     return machine_data,project_data
 
@@ -49,7 +49,7 @@ def load_data_from_yaml(yaml_path,proj_name):
 def defaulted(config,name,default_val):
     return config[name] if name in config else default_val
 
-def gen_rsync_on_data(computer_data,project_data,is_forward):
+def gen_rsync_on_data(computer_data,project_data,is_forward,yaml_override):
     command = generate_rsync_command(
         username=computer_data['username'],
         ssh_key=computer_data['ssh_key_path'],
@@ -67,8 +67,8 @@ def exec_command(command):
     joined_cmd = " ".join(command)
     subprocess.check_call(command)#joined_cmd,shell=True)
 
-def exec_input(yaml_path,proj_name,is_forward):
-    computer_data,project_data = load_data_from_yaml(yaml_path,proj_name)
+def exec_input(yaml_path,proj_name,is_forward,computer_override):
+    computer_data,project_data = load_data_from_yaml(yaml_path,proj_name,computer_override)
     command = gen_rsync_on_data(computer_data,project_data,is_forward)
     print(" ".join(command))
     exec_command(command)
@@ -85,8 +85,9 @@ def test():
     print(" ".join(command))
 
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, "needs 2 arguments, the project name and the direction (true for forward)"
+    assert 3 <= len(sys.argv) <= 4, "needs 2 arguments, the project name and the direction (true for forward)"
     projname = sys.argv[1]
     is_forward = True if "true" in sys.argv[2].lower()  else False
     yaml_path = os.path.expanduser("~/.local/var/")
-    exec_input(yaml_path,projname,is_forward)
+    yaml_override = None if len(sys.argv) < 4 else sys.argv[3]
+    exec_input(yaml_path,projname,is_forward,yaml_override)
