@@ -49,7 +49,7 @@ def load_data_from_yaml(yaml_path,proj_name,computer_override):
 def defaulted(config,name,default_val):
     return config[name] if name in config else default_val
 
-def gen_rsync_on_data(computer_data,project_data,is_forward,yaml_override):
+def gen_rsync_on_data(computer_data,project_data,is_forward):
     command = generate_rsync_command(
         username=computer_data['username'],
         ssh_key=computer_data['ssh_key_path'],
