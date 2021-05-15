@@ -21,7 +21,7 @@ There are two configuration files, both in yaml format:
 The computer config is where you place information about the remote computer. It looks like this:
 
 ```
-username: weepingwillowben  # <unix username>
+username: benblack769  # <unix username>
 ip: 67.124.212.159          # <server ip address>
 port: 22                    # <server ssh port (should be 22)>
 ssh_key_path: ~/.ssh/desktop_key/id_desk # path to ssh key that allows passwordless login
