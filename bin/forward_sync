@@ -1,0 +1,2 @@
+#!/bin/bash
+python -m quicksync.sync_lib $1 True $2
